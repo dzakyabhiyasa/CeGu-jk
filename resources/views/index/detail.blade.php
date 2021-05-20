@@ -118,7 +118,7 @@
                     </a>
                 </div>
                 <div class="col-10">
-                    <a href="{{ route('booking') }}" class="btn btn-info btn-block">
+                    <a href="{{ route('booking', $building->id) }}" class="btn btn-info btn-block">
                         Izin Memasuki Gedung
                     </a>
                 </div>
