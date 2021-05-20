@@ -40,7 +40,7 @@ Pilihlah Gedung yang Anda Inginkan
     @foreach($buildings as $building)
     <div class="col-12 col-lg-4 col-md-6">
         <div class="card">
-            @if(isset($building->images))
+            @if($building->images->count() > 0)
             <img class="card-img-top img-responsive" src="{{ Storage::get($building->images[0]->image) }}" alt="Card image cap">
             @else
             <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">
