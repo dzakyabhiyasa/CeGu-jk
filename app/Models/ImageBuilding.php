@@ -5,26 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class ImageBuilding extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'building_id', 'name', 'description', 'capacity',
+        'building_id', 'image',
     ];
 
     public function building()
     {
         return $this->belongsTo('App\Models\Building');   
-    }
-
-    public function bookings()
-    {
-        return $this->hasMany('App\Models\Booking');   
-    }
-
-    public function images()
-    {
-        return $this->hasMany('App\Models\ImageRoom');   
     }
 }

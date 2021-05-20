@@ -25,5 +25,7 @@ Route::get('/detail', [App\Http\Controllers\IndexController::class, 'detail'])->
 Route::get('/detail/booking', [App\Http\Controllers\IndexController::class, 'booking'])->name('booking');
 Route::get('/success', [App\Http\Controllers\IndexController::class, 'success'])->name('success');
 
+Route::resource('photos', PhotoController::class);
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
