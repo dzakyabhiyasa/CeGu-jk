@@ -17,4 +17,9 @@ class Building extends Model
     {
         return $this->hasMany('App\Models\Room');   
     }
+
+    public function images()
+    {
+        return $this->hasMany('App\Models\ImageBuilding');   
+    }
 }
