@@ -32,9 +32,12 @@ class IndexController extends Controller
         ]);
     }
 
-    public function detail()
+    public function detail($id)
     {
-        return view('index.detail');
+        $building = Building::find($id);
+        return view('index.detail')->with([
+            'building' => $building
+        ]);
     }
 
     public function profile()

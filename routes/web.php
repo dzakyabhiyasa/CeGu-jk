@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+`
 
 Auth::routes();
 
@@ -22,7 +22,7 @@ Route::post('/profile', [App\Http\Controllers\IndexController::class, 'profilePo
 Route::post('/profile/password', [App\Http\Controllers\IndexController::class, 'profilePassword'])->middleware('auth')->name('profile.password');
 
 Route::get('/list', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
-Route::get('/detail', [App\Http\Controllers\IndexController::class, 'detail'])->name('detail');
+Route::get('/detail/{id}', [App\Http\Controllers\IndexController::class, 'detail'])->name('detail');
 Route::get('/detail/booking', [App\Http\Controllers\IndexController::class, 'booking'])->name('booking');
 Route::get('/success', [App\Http\Controllers\IndexController::class, 'success'])->name('success');
 

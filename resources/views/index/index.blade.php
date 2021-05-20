@@ -71,7 +71,7 @@ Pilihlah Gedung yang Anda Inginkan
                     </div>
                 </div>
                 <hr>
-                <a href="{{ route('detail') }}" class="btn btn-info btn-block">
+                <a href="{{ route('detail', $building->id) }}" class="btn btn-info btn-block">
                     Cek Ruangan
                 </a>
             </div>
