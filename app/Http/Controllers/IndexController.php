@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
+
+    public function landing(){
+        return view('index.home');
+    }
+
     public function index()
     {
         return view('index.index');
