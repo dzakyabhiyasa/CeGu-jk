@@ -103,6 +103,6 @@ class IndexController extends Controller
             'status' => 'booking'
         ]);  
 
-        return redirect('home');
+        return redirect(route('booking.index'));
     }
 }

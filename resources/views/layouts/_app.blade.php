@@ -88,6 +88,10 @@
                                     <i class="ti-user m-r-5 m-l-5"></i>
                                     Profil Saya
                                 </a>
+                                <a class="dropdown-item" href="{{ route('booking.index') }}">
+                                    <i class="ti-book m-r-5 m-l-5"></i>
+                                    Riwayat Booking
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i>
