@@ -16,26 +16,30 @@ Perizinan Akses Gedung
 <div class="row">
     <div class="col-12 col-lg-6">
         <p>Untuk Menjaga Keamanan dan Kenyamanan, Dimohon untuk melakukan perizinan terlebih dahulu dengan mengisi form sebagai berikut : </p>
-        <form method="post">
+        <form method="post" action="{{ route('booking.process', [$building_id, $room_id]) }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="reason">Alasan Penggunaan Akses</label>
-                <textarea class="form-control" name="reason" id="reason" cols="30" rows="2" ></textarea>
+                <textarea class="form-control" name="reason" id="reason" cols="30" rows="2"></textarea>
             </div>
             <div class="form-group">
                 <label for="date-format">Jadwal Digunakan</label>
                 <p class="mt-0">* Akan kadaluarsa selama 7 hari</p>
-                <input type="text" id="date-format" class="form-control">
+                <input name="expired" type="text" class="date-format form-control">
+            </div>
+            <div class="form-group">
+                <label for="date-format">Jadwal Selesai</label>
+                <input name="out" type="text" class="date-format form-control">
             </div>
             <div class="form-group">
                 <label for="reason">Surat Keterangan Sehat COVID-19</label>
                 <p class="mt-0">* *Dikarenakan sedang terjadi pandemi COVID-19, Dimohon untuk memberi surat Rapid/Swab/Antigen.</p>
-                <input type="file" class="form-control">
+                <input name="covid" type="file" class="form-control">
             </div>
+            <button type="submit" class="btn btn-info btn-block mt-5">
+                Buat Izin
+            </button>
         </form>
-        <a href="{{ route('success') }}" class="btn btn-info btn-block mt-5">
-            Buat Izin
-        </a>
     </div>
     <div class="col-12 col-lg-6 d-none d-sm-block">
         <img src="vector/permission.svg" width="100%">
@@ -47,7 +51,7 @@ Perizinan Akses Gedung
 <script src="assets/libs/moment/moment.js"></script>
 <script src="assets/libs/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker-custom.js"></script>
 <script>
-    $('#date-format').bootstrapMaterialDatePicker({
+    $('.date-format').bootstrapMaterialDatePicker({
         format: 'dddd DD MMMM YYYY - HH:mm'
     });
 </script>

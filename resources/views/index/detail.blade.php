@@ -9,10 +9,12 @@
     .box-1-1 {
         position: relative;
         width: 100%;
-        padding-top: 100%; /* 1:1 Aspect Ratio */
+        padding-top: 100%;
+        /* 1:1 Aspect Ratio */
     }
+
     .content-1-1 {
-        position:  absolute;
+        position: absolute;
         top: 0;
         left: 0;
         bottom: 0;
@@ -91,13 +93,14 @@
         </p> -->
         <hr>
         <h5>Pilih Ruangan yang Tersedia</h5>
-        <form method="post">
+        <form method="post" action="{{ route('booking', $building->id) }}">
+            @csrf
             <div class="row">
                 @foreach($building->rooms as $room)
                 <div class="col-2 mb-3">
                     <div class="box-1-1">
                         <div class="content-1-1">
-                            <input id="seat-{{ $loop->iteration }}" class="seat-select" type="checkbox" value="{{ $loop->iteration }}" name="seat[]" />
+                            <input id="seat-{{ $loop->iteration }}" class="seat-select" type="radio" value="{{ $room->id }}" name="seat" />
                             <label for="seat-{{ $loop->iteration }}" class="seat">
                                 <div class="d-flex justify-content-center align-items-stretch" style="height: 100%;">
                                     <div class="d-flex align-items-center">
@@ -118,9 +121,9 @@
                     </a>
                 </div>
                 <div class="col-10">
-                    <a href="{{ route('booking', $building->id) }}" class="btn btn-info btn-block">
+                    <button type="submit" class="btn btn-info btn-block">
                         Izin Memasuki Gedung
-                    </a>
+                    </button>
                 </div>
             </div>
         </form>
