@@ -50,9 +50,9 @@
         <div id="carouselExampleControls" class="carousel slide mb-3" data-ride="carousel">
             <div class="carousel-inner" role="listbox" style="border-radius: 8px;">
                 @foreach($building->images as $image)
-                <div class="carousel-item active">
+                <div class="carousel-item {{ $loop->index == 0 ? 'active' : '' }}">
                     <div class="container p-0">
-                        <img class="d-block img-fluid rounded" src="{{ Storage::get('$image->image') }}" alt="First slide">
+                        <img class="d-block img-fluid rounded" src="{{ Storage::url($image->image) }}" alt="First slide">
                     </div>
                 </div>
                 @endforeach

@@ -41,7 +41,7 @@ Pilihlah Gedung yang Anda Inginkan
     <div class="col-12 col-lg-4 col-md-6">
         <div class="card">
             @if($building->images->count() > 0)
-            <img class="card-img-top img-responsive" src="{{ Storage::get($building->images[0]->image) }}" alt="Card image cap">
+            <img class="card-img-top img-responsive" src="{{ Storage::url($building->images[0]->image) }}" alt="Card image cap">
             @else
             <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">
             @endif
@@ -62,14 +62,14 @@ Pilihlah Gedung yang Anda Inginkan
                         <span class="badge badge-pill badge-warning">{{ $building->rooms->count() }}</span>
                     </div>
                 </div>
-                <div class="d-flex mb-2">
+                <!-- <div class="d-flex mb-2">
                     <div class="mr-2 font-weight-bold align-items-center">
                         <p class="mb-0">Jumlah Terpakai</p>
                     </div>
                     <div class="ml-auto align-items-center">
                         <span class="badge badge-pill badge-danger">5</span>
                     </div>
-                </div>
+                </div> -->
                 <hr>
                 <a href="{{ route('detail', $building->id) }}" class="btn btn-info btn-block">
                     Cek Ruangan

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ImageBuilding;
 use App\Models\Room;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,9 @@ class DatabaseSeeder extends Seeder
         ->has(
             Room::factory()
             ->count(10)
+        )
+        ->has(
+            ImageBuilding::factory()->count(4), 'images'
         )
         ->create();
     }
