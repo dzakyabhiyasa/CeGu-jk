@@ -22,6 +22,20 @@ class BookingController extends Controller
         ]);
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_admin()
+    {
+        $bookings = Booking::paginate(5);
+
+        return view('dashboard.booking')->with([
+            'bookings' => $bookings
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -86,5 +100,21 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         //
+    }
+
+    public function approve(Request $request, $id){
+        Booking::find($id)->update([
+            'status' => 'accept'
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function decline(Request $request, $id){
+        Booking::find($id)->update([
+            'status' => 'reject'
+        ]);
+
+        return redirect()->back();
     }
 }

@@ -90,7 +90,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="/dashboard" class="nav-link">
+                            <a href="{{ route('dashboard.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Dashboard
@@ -107,13 +107,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./index.html" class="nav-link active">
+                                    <a href="{{ route('dashboard.booking') }}" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Gedung</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link">
+                                    <a href="{{ route('dashboard.booking') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ruangan</p>
                                     </a>
