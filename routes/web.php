@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +35,6 @@ Route::resource('photos', PhotoController::class);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//dashboard
+Route::get('admin', [IndexController::class, 'admin'])->name('dashboard.index');

@@ -18,7 +18,16 @@ class IndexController extends Controller
 
     public function landing()
     {
-        return view('index.home');
+
+        if (!Auth::check()) {
+            return view('index.home');
+        }
+
+        if (Auth::user()->role == 'admin') {
+            return redirect(route('dashboard.index'));
+        } else {
+            return view('index.home');
+        }
     }
 
     public function index(Request $request)
@@ -33,6 +42,10 @@ class IndexController extends Controller
         return view('index.index')->with([
             'buildings' => $buildings
         ]);
+    }
+
+    public function admin(){
+        return view('dashboard.index');
     }
 
     public function detail($id)
@@ -83,7 +96,7 @@ class IndexController extends Controller
     public function booking_process(Request $request, $building_id, $room_id)
     {
 
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect(route('login'));
         }
 
@@ -101,7 +114,7 @@ class IndexController extends Controller
             'permission' => $path,
             'expired' => 0,
             'status' => 'booking'
-        ]);  
+        ]);
 
         return redirect(route('booking.index'));
     }
