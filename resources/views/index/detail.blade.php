@@ -1,7 +1,7 @@
 @extends('layouts._app')
 
 @section('title')
-[NAMA GEDUNG]
+{{ $building->name }}
 @endsection
 
 @section('css')
@@ -9,10 +9,12 @@
     .box-1-1 {
         position: relative;
         width: 100%;
-        padding-top: 100%; /* 1:1 Aspect Ratio */
+        padding-top: 100%;
+        /* 1:1 Aspect Ratio */
     }
+
     .content-1-1 {
-        position:  absolute;
+        position: absolute;
         top: 0;
         left: 0;
         bottom: 0;
@@ -41,7 +43,7 @@
 @endsection
 
 @section('header')
-[NAMA GEDUNG]
+{{ $building->name }}
 @endsection
 
 @section('content')
@@ -49,21 +51,13 @@
     <div class="col-12 col-lg-6">
         <div id="carouselExampleControls" class="carousel slide mb-3" data-ride="carousel">
             <div class="carousel-inner" role="listbox" style="border-radius: 8px;">
-                <div class="carousel-item active">
+                @foreach($building->images as $image)
+                <div class="carousel-item {{ $loop->index == 0 ? 'active' : '' }}">
                     <div class="container p-0">
-                        <img class="d-block img-fluid rounded" src="assets/images/big/img1.jpg" alt="First slide">
+                        <img class="d-block img-fluid rounded" src="{{ Storage::url($image->image) }}" alt="First slide">
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="container p-0">
-                        <img class="d-block img-fluid rounded" src="assets/images/big/img2.jpg" alt="Second slide">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container p-0">
-                        <img class="d-block img-fluid rounded" src="assets/images/big/img3.jpg" alt="Third slide">
-                    </div>
-                </div>
+                @endforeach
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -80,9 +74,9 @@
             Deskripsi Gedung :
         </h5>
         <p>
-            Gedung Ahmad ini memiliki 10 ruangan yang sangat nyaman didalamnya, setiap ruangannya terdapat fasilitas seperti :
+            {{ $building->description }}
         </p>
-        <p class="mb-0">
+        <!-- <p class="mb-0">
             - Papan Tulis
         </p>
         <p class="mb-0">
@@ -96,27 +90,28 @@
         </p>
         <p class="mb-0">
             - Papan Tulis
-        </p>
+        </p> -->
         <hr>
         <h5>Pilih Ruangan yang Tersedia</h5>
-        <form method="post">
+        <form method="post" action="{{ route('booking', $building->id) }}">
+            @csrf
             <div class="row">
-                @for ($i = 0; $i < 12; $i++)
+                @foreach($building->rooms as $room)
                 <div class="col-2 mb-3">
                     <div class="box-1-1">
                         <div class="content-1-1">
-                            <input id="seat-{{ $i }}" class="seat-select" type="checkbox" value="{{ $i }}" name="seat[]" />
-                            <label for="seat-{{ $i }}" class="seat">
+                            <input id="seat-{{ $loop->iteration }}" class="seat-select" type="radio" value="{{ $room->id }}" name="seat" />
+                            <label for="seat-{{ $loop->iteration }}" class="seat">
                                 <div class="d-flex justify-content-center align-items-stretch" style="height: 100%;">
                                     <div class="d-flex align-items-center">
-                                        {{ $i+1 }}
+                                        {{ $loop->iteration }}
                                     </div>
                                 </div>
                             </label>
                         </div>
                     </div>
                 </div>
-                @endfor
+                @endforeach
             </div>
             <p class="text-info font-italic">* Sebelum memasuki gedung dan ruangan harap membuat pereizinan terlebih dahulu</p>
             <div class="row mt-2">
@@ -126,9 +121,9 @@
                     </a>
                 </div>
                 <div class="col-10">
-                    <a href="{{ route('booking') }}" class="btn btn-info btn-block">
+                    <button type="submit" class="btn btn-info btn-block">
                         Izin Memasuki Gedung
-                    </a>
+                    </button>
                 </div>
             </div>
         </form>

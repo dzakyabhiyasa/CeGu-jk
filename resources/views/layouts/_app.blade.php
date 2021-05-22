@@ -36,7 +36,7 @@
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
                         <i class="ti-menu ti-close"></i>
                     </a>
-                    <a class="navbar-brand" href="{{ route('index') }}">
+                    <a class="navbar-brand" href="{{ route('landing') }}">
                         <b class="logo-icon">
                             <img src="img/header-logo.png" alt="homepage" class="dark-logo" />
                             <img src="img/header-logo.png" alt="homepage" class="light-logo" />
@@ -88,6 +88,10 @@
                                     <i class="ti-user m-r-5 m-l-5"></i>
                                     Profil Saya
                                 </a>
+                                <a class="dropdown-item" href="{{ route('booking.index') }}">
+                                    <i class="ti-book m-r-5 m-l-5"></i>
+                                    Riwayat Booking
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i>
@@ -107,7 +111,7 @@
             <div class="scroll-sidebar">
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="starter-kit.html" aria-expanded="false"><i class="icon-File-Hide"></i><span class="hide-menu">Starter page </span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark" href="{{ route('index') }}" aria-expanded="false"><i class="icon-File-Hide"></i><span class="hide-menu">List Gedung</span></a></li>
                         <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Personal</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-Car-Wheel"></i><span class="hide-menu">Dashboard </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">

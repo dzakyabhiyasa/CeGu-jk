@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -14,7 +15,25 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Booking::where('user_id', Auth::user()->id)->paginate(5);
+
+        return view('booking.index')->with([
+            'bookings' => $bookings
+        ]);
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_admin()
+    {
+        $bookings = Booking::paginate(5);
+
+        return view('dashboard.booking')->with([
+            'bookings' => $bookings
+        ]);
     }
 
     /**
@@ -81,5 +100,21 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         //
+    }
+
+    public function approve(Request $request, $id){
+        Booking::find($id)->update([
+            'status' => 'accept'
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function decline(Request $request, $id){
+        Booking::find($id)->update([
+            'status' => 'reject'
+        ]);
+
+        return redirect()->back();
     }
 }
