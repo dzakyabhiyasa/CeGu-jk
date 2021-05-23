@@ -44,9 +44,14 @@ class RoomController extends Controller
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function show(room $room)
+    public function show($id)
     {
-        //
+
+        $room = room::find($id);
+
+        return view('index.detail-room')->with([
+            'room' => $room
+        ]);
     }
 
     /**

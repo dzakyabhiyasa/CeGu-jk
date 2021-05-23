@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,9 @@ Route::get('/detail/{building_id}/booking/{room_id}', [App\Http\Controllers\Inde
 Route::post('/detail/{building_id}/booking/{room_id}/process', [App\Http\Controllers\IndexController::class, 'booking_process'])->name('booking.process');
 Route::get('/detail/{building_id}', [App\Http\Controllers\IndexController::class, 'detail'])->name('detail');
 Route::get('/success', [App\Http\Controllers\IndexController::class, 'success'])->name('success');
+
+Route::post('/building-to-room', [IndexController::class, 'building_to_room'])->name('building.room');
+Route::get('/room/{id}', [RoomController::class, 'show'])->name('room.show');
 
 Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
