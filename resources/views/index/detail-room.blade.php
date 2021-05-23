@@ -89,6 +89,18 @@
     </div>
     <div class="col-12">
         <h1 class="text-center my-5">Jadwal Ruangan</h1>
+        <div class="row justify-content-left mb-3">
+            <div class="col-sm-3">
+                <form action="{{ route('room.show', $room->id) }}" method="get">
+                    <select name="order" id="order" class="form-control">
+                        <option value="asc">Terlama</option>
+                        <option value="desc" selected>Terbaru</option>
+                    </select>
+                    <button class="btn btn-info mt-2" type="submit">Filter</button>
+                </form>
+            </div>
+        </div>
+
         <table class="table table-bordered">
             <tr>
                 <th>Room Master</th>
@@ -96,7 +108,7 @@
                 <th>Kegiatan</th>
             </tr>
             <tr>
-                @foreach($room->bookings as $booking)
+                @foreach($bookings as $booking)
                 <td>-</td>
                 <td>{{ $booking->date }}</td>
                 <td>{{ $booking->description }}</td>
