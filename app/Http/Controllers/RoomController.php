@@ -51,9 +51,9 @@ class RoomController extends Controller
         $room = room::find($id);
 
         if ($request->query('order') !== null) {
-            $bookings = Booking::where('room_id', $id)->where('status', 'accept')->orderBy('created_at', $request->query('order'))->get();
+            $bookings = Booking::with('user')->where('room_id', $id)->where('status', 'accept')->orderBy('created_at', $request->query('order'))->get();
         } else {
-            $bookings = Booking::where('room_id', $id)->where('status', 'accept')->get();
+            $bookings = Booking::with('user')->where('room_id', $id)->where('status', 'accept')->get();
         }
 
         return view('index.detail-room')->with([

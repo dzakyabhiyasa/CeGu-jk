@@ -43,33 +43,25 @@
 @endsection
 
 @section('header')
-{{ $room->name }}
+{{ $room->building->name }} / {{ $room->name }}
 @endsection
 
 @section('content')
 <div class="row justify-content-center">
     <div class="col-12">
         <div class="row shadow-sm rounded-lg p-5">
-            <div class="col-sm-12 mb-5">
-                <h1>{{ $room->building->name }}</h1>
-                <p>Perizinan Ruangan {{ $room->name }}</p>
-            </div>
             <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="reason">Nama Master Room</label>
-                    <p></p>
+                <div class="form-group mb-5">
+                    <h1>{{ $room->name }}</h1>
+                    <p>{{ $room->building->name }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="reason">Jadwal Kegiatan</label>
-                    <p></p>
+                    <label for="reason">Deskripsi Ruangan</label>
+                    <p>{{ $room->description }}</p>
                 </div>
                 <div class="form-group">
-                    <label for="reason">Deskripsi Kegiatan</label>
-                    <p></p>
-                </div>
-                <div class="form-group">
-                    <p>Kapasitas Maksimal : {{ $room->capacity }}</p>
-                    <p>Jumlah Orang Saat Ini : </p>
+                    <label for="reason">Kapasitas Maksimal</label>
+                    <p>{{ $room->capacity }}</p>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -104,13 +96,17 @@
         <table class="table table-bordered">
             <tr>
                 <th>Room Master</th>
-                <th>Waktu</th>
+                <th>Tanggal</th>
+                <th>Check in</th>
+                <th>Check out</th>
                 <th>Kegiatan</th>
             </tr>
             <tr>
                 @foreach($bookings as $booking)
-                <td>-</td>
+                <td>{{ $booking->user->name }}</td>
                 <td>{{ $booking->date }}</td>
+                <td>{{ $booking->in }}</td>
+                <td>{{ $booking->out }}</td>
                 <td>{{ $booking->description }}</td>
                 @endforeach
             </tr>
