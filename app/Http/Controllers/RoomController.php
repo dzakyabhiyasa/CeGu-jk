@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\room;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,21 @@ class RoomController extends Controller
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function show(room $room)
+    public function show(Request $request, $id)
     {
-        //
+
+        $room = room::find($id);
+
+        if ($request->query('order') !== null) {
+            $bookings = Booking::with('user')->where('room_id', $id)->where('status', 'accept')->orderBy('created_at', $request->query('order'))->get();
+        } else {
+            $bookings = Booking::with('user')->where('room_id', $id)->where('status', 'accept')->get();
+        }
+
+        return view('index.detail-room')->with([
+            'room' => $room,
+            'bookings' => $bookings
+        ]);
     }
 
     /**

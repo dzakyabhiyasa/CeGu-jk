@@ -93,7 +93,7 @@
         </p> -->
         <hr>
         <h5>Pilih Ruangan yang Tersedia</h5>
-        <form method="post" action="{{ route('booking', $building->id) }}">
+        <form method="post" action="{{ route('building.room') }}">
             @csrf
             <div class="row">
                 @foreach($building->rooms as $room)

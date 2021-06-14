@@ -79,6 +79,11 @@ class IndexController extends Controller
         return Helpers::successRedirect('profile', 'Berhasil merubah password !');
     }
 
+    public function building_to_room(Request $request){
+        $room_id = $request->seat;
+        return redirect(route('room.show', $room_id));
+    }
+
     public function booking(Request $request, $building_id)
     {
         $room_id = $request->seat;
