@@ -20,8 +20,6 @@ History Transaksi
             <th>No</th>
             <th>Ruangan</th>
             <th>Tanggal</th>
-            <th>Jam Masuk</th>
-            <th>Jam Keluar</th>
             <th>Deskripsi</th>
             <th>status</th>
             <th>Action</th>
@@ -31,12 +29,17 @@ History Transaksi
             <td>{{ $loop->iteration }}</td>
             <td>{{ $booking->room->name }}</td>
             <td>{{ $booking->date }}</td>
-            <td>{{ $booking->in }}</td>
-            <td>{{ $booking->out }}</td>
             <td>{{ $booking->description }}</td>
             <td>{{ $booking->status }}</td>
             <td>
-                <button class="btn btn-primary w-100">Update</button>
+                @if ($booking->status == 'accept')
+                    <form action="{{ route('visitor.index') }}" method="GET">
+                        <input type="hidden" name="bookingId" value="{{$booking->id}}" />
+                        <button class="btn btn-primary w-100" type="submit">List Pengunjung</button> 
+                    </form>
+                @else
+                    <button class="btn btn-primary w-100" disabled>List Pengunjung</button>    
+                @endif               
             </td>
         </tr>
         @endforeach

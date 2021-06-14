@@ -12,9 +12,16 @@ class VisitorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $visitors = Visitor::with('booking.room.building')->where('booking_id', $request->input('bookingId'))->get();
+
+        // dd($visitors);
+
+        return view('visitor.index')->with([
+            'visitors' => $visitors,
+            'bookingId' => $request->input('bookingId')
+        ]);
     }
 
     /**
@@ -22,9 +29,11 @@ class VisitorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('visitor.create')->with([
+            'bookingId' => $request->input('bookingId')
+        ]);
     }
 
     /**
@@ -35,7 +44,8 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Visitor::create($request->all());
+        return redirect()->route('visitor.index', ['bookingId' => $request->input('booking_id')]);
     }
 
     /**
@@ -55,9 +65,12 @@ class VisitorController extends Controller
      * @param  \App\Models\Visitor  $visitor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Visitor $visitor)
+    public function edit(Visitor $visitor, Request $request)
     {
-        //
+        return view('visitor.edit')->with([
+            'bookingId' => $request->input('bookingId'),
+            'visitor' => $visitor
+        ]);
     }
 
     /**
@@ -69,7 +82,9 @@ class VisitorController extends Controller
      */
     public function update(Request $request, Visitor $visitor)
     {
-        //
+        $visitor->update($request->all());
+        
+        return redirect()->route('visitor.index', ['bookingId' => $request->input('booking_id')]);
     }
 
     /**
@@ -78,8 +93,9 @@ class VisitorController extends Controller
      * @param  \App\Models\Visitor  $visitor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Visitor $visitor)
+    public function destroy(Visitor $visitor, Request $request)
     {
-        //
+        $visitor->delete();   
+        return redirect()->route('visitor.index',['bookingId' => $request->input('bookingId')]);
     }
 }
