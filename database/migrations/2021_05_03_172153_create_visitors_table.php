@@ -17,7 +17,7 @@ class CreateVisitorsTable extends Migration
             $table->id();
             $table->foreignId('booking_id');
             $table->string('name');
-            $table->string('no_id');
+            $table->string('no_id')->unique();
             $table->string('email');
             $table->string('contact');
             $table->timestamps();

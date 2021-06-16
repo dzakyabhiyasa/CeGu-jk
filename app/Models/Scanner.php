@@ -10,10 +10,10 @@ class Scanner extends Model
     use HasFactory;
 
     protected $fillable = [
-        'booking_id', 'visitor_id', 'permission_rapid', 'body_temperature', 'face_mask', 'washing_hands',
+        'booking_id', 'visitor_id', 'permission_rapid', 'body_temperature', 'face_mask', 'washing_hands', 'building_in', 'room_in'
     ];
 
-    public function sisitor()
+    public function visitor()
     {
         return $this->belongsTo('App\Models\Visitor');   
     }

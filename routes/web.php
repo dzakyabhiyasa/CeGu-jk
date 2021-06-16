@@ -4,6 +4,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\ScannerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,11 +37,13 @@ Route::get('/room/{id}', [RoomController::class, 'show'])->name('room.show');
 
 Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
-// Route::get('/visitor', [VisitorController::class, 'index'])->name('visitor.index');
-
-Route::resource('photos', PhotoController::class);
-
 Route::resource('visitor', VisitorController::class);
+
+Route::get('/scanner/scan', [ScannerController::class, 'scanning'])->name('scanner.scan');
+
+Route::resource('scanner', ScannerController::class);
+
+Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
