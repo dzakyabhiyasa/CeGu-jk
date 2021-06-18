@@ -146,4 +146,32 @@ class ScannerController extends Controller
         $scanner->delete();   
         return redirect()->route('scanner.index',['bookingId' => $request->input('bookingId')]);
     }
+
+    public function scan_gedung(Request $request)
+    {
+        if ($request->input('sort_date') !== '' && !empty($request->input('sort_date'))) {
+            $scanners = Scanner::whereDate('building_in', '=', $request->input('sort_date'))->get();
+        } else {
+            $scanners = Scanner::get();
+        }
+        
+        return view('dashboard.scan_gedung')->with([
+            'scanners' => $scanners,
+            'sort_date' => $request->input('sort_date')
+        ]);
+    }
+
+    public function scan_ruangan(Request $request)
+    {
+        if ($request->input('sort_date') !== '' && !empty($request->input('sort_date'))) {
+            $scanners = Scanner::whereDate('room_in', '=', $request->input('sort_date'))->get();
+        } else {
+            $scanners = Scanner::get();
+        }
+        
+        return view('dashboard.scan_ruangan')->with([
+            'scanners' => $scanners,
+            'sort_date' => $request->input('sort_date')
+        ]);
+    }
 }

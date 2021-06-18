@@ -39,15 +39,8 @@ class RoomController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\room  $room
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id)
+    public function detail(Request $request, $id)
     {
-
         $room = room::find($id);
 
         if ($request->query('order') !== null) {
@@ -60,6 +53,17 @@ class RoomController extends Controller
             'room' => $room,
             'bookings' => $bookings
         ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\room  $room
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, room $room)
+    {
+
     }
 
     /**

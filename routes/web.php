@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ScannerController;
+use App\Http\Controllers\BuildingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +34,7 @@ Route::get('/detail/{building_id}', [App\Http\Controllers\IndexController::class
 Route::get('/success', [App\Http\Controllers\IndexController::class, 'success'])->name('success');
 
 Route::post('/building-to-room', [IndexController::class, 'building_to_room'])->name('building.room');
-Route::get('/room/{id}', [RoomController::class, 'show'])->name('room.show');
+Route::get('/room/{id}', [RoomController::class, 'detail'])->name('room.show');
 
 Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
@@ -53,3 +54,7 @@ Route::get('/admin', [IndexController::class, 'admin'])->name('dashboard.index')
 Route::get('/admin/booking', [BookingController::class, 'index_admin'])->name('dashboard.booking');
 Route::post('/admin/booking/{id}/approve', [BookingController::class, 'approve'])->name('dashboard.approve');
 Route::post('/admin/booking/{id}/decline', [BookingController::class, 'decline'])->name('dashboard.decline');
+Route::get('/admin/scanning/gedung', [ScannerController::class, 'scan_gedung'])->name('dashboard.scan.gedung');
+Route::get('/admin/scanning/ruangan', [ScannerController::class, 'scan_ruangan'])->name('dashboard.scan.ruangan');
+Route::resource('admin/gedung', BuildingController::class);
+Route::resource('admin/ruangan', RoomController::class);
