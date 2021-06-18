@@ -103,7 +103,7 @@ class IndexController extends Controller
 
     public function booking_process(Request $request, $building_id, $room_id)
     {
-
+        // dd($request);
         if (!Auth::check()) {
             return redirect(route('login'));
         }
@@ -115,9 +115,9 @@ class IndexController extends Controller
         Booking::create([
             'room_id' => $room_id,
             'user_id' => Auth::user()->id,
-            'date' => Carbon::now(),
-            'in' => Carbon::now(),
-            'out' => Carbon::now(),
+            'date' => $request->date,
+            'in' => $request->in,
+            'out' => $request->out,
             'description' => $request->reason,
             'permission' => $path,
             'expired' => 0,
