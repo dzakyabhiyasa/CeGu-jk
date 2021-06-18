@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ImageBuilding;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
-class ImageBuildingController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,24 +35,16 @@ class ImageBuildingController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $path = $request->file('image')->store('public');
-
-        ImageBuilding::create([
-            'building_id' => $request->building_id,
-            'image' => $path,
-        ]);
-
-        return redirect()->route('gedung.edit', [$request->building_id]);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ImageBuilding  $imageBuilding
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show(ImageBuilding $imageBuilding)
+    public function show(Notification $notification)
     {
         //
     }
@@ -60,10 +52,10 @@ class ImageBuildingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ImageBuilding  $imageBuilding
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit(ImageBuilding $imageBuilding)
+    public function edit(Notification $notification)
     {
         //
     }
@@ -72,10 +64,10 @@ class ImageBuildingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ImageBuilding  $imageBuilding
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ImageBuilding $imageBuilding)
+    public function update(Request $request, Notification $notification)
     {
         //
     }
@@ -83,14 +75,11 @@ class ImageBuildingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ImageBuilding  $imageBuilding
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Notification $notification)
     {
-        $imageBuilding = ImageBuilding::find($id);
-        $imageBuilding->delete(); 
-
-        return redirect()->route('gedung.edit', [$request->building_id]);
+        //
     }
 }
