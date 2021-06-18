@@ -21,6 +21,15 @@ class NotificationController extends Controller
         ]);
     }
 
+    public function index_user()
+    {
+        $notifications = Notification::get();
+        // dd($notifications);
+        return view('notif.user')->with([
+            'notifications' => $notifications
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
