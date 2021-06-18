@@ -115,13 +115,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('gedung.index') }}" class="nav-link {{ Request::is('admin/crud/gedung') ? 'active' : ''}}">
+                                    <a href="{{ route('gedung.index') }}" class="nav-link {{ Request::is('admin/crud/gedung*') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Gedung</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('ruangan.index') }}" class="nav-link {{ Request::is('admin/crud/ruangan') ? 'active' : ''}}">
+                                    <a href="{{ route('ruangan.index') }}" class="nav-link {{ Request::is('admin/crud/ruangan*') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ruangan</p>
                                     </a>
@@ -138,13 +138,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.scan.gedung') }}" class="nav-link {{ Request::is('admin/scanning/gedung') ? 'active' : ''}}">
+                                    <a href="{{ route('dashboard.scan.gedung') }}" class="nav-link {{ Request::is('admin/scanning/gedung*') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Gedung</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.scan.ruangan') }}" class="nav-link {{ Request::is('admin/scanning/ruangan') ? 'active' : ''}}">
+                                    <a href="{{ route('dashboard.scan.ruangan') }}" class="nav-link {{ Request::is('admin/scanning/ruangan*') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ruangan</p>
                                     </a>

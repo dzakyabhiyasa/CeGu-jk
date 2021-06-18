@@ -35,7 +35,15 @@ class ImageRoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $path = $request->file('image')->store('public/room');
+
+        ImageRoom::create([
+            'room_id' => $request->room_id,
+            'image' => $path,
+        ]);
+
+        return redirect()->route('ruangan.edit', [$request->room_id]);
     }
 
     /**
@@ -78,8 +86,11 @@ class ImageRoomController extends Controller
      * @param  \App\Models\ImageRoom  $imageRoom
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ImageRoom $imageRoom)
+    public function destroy(Request $request, $id)
     {
-        //
+        $imageRoom = ImageRoom::find($id);
+        $imageRoom->delete(); 
+
+        return redirect()->route('ruangan.edit', [$request->room_id]);
     }
 }

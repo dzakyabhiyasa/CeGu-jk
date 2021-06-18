@@ -8,6 +8,7 @@ use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ImageBuildingController;
+use App\Http\Controllers\ImageRoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,3 +63,4 @@ Route::resource('admin/crud/gedung', BuildingController::class);
 Route::resource('admin/crud/ruangan', RoomController::class);
 Route::resource('admin/notification', NotificationController::class);
 Route::resource('admin/image-gambar', ImageBuildingController::class);
+Route::resource('admin/image-room', ImageRoomController::class);
