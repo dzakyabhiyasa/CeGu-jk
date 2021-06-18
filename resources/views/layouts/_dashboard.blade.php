@@ -90,15 +90,15 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.index') }}" class="nav-link">
+                            <a href="{{ route('dashboard.index') }}" class="nav-link {{ Request::is('admin') ? 'active' : ''}}  ">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Dashboard
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard.booking') }}" class="nav-link">
+                        <li class="nav-item active">
+                            <a href="{{ route('dashboard.booking') }}" class="nav-link {{ Request::is('admin/booking') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-check-square"></i>
                                 <p>
                                     Approval
@@ -106,7 +106,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link {{ Request::is('admin/crud*') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-database"></i>
                                 <p>
                                     Pengolahan Data
@@ -115,13 +115,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.booking') }}" class="nav-link">
+                                    <a href="{{ route('gedung.index') }}" class="nav-link {{ Request::is('admin/crud/gedung') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Gedung</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.booking') }}" class="nav-link">
+                                    <a href="{{ route('ruangan.index') }}" class="nav-link {{ Request::is('admin/crud/ruangan') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ruangan</p>
                                     </a>
@@ -129,7 +129,7 @@
                             </ul>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link {{ Request::is('admin/scanning*') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Scanning
@@ -138,13 +138,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.scan.gedung') }}" class="nav-link">
+                                    <a href="{{ route('dashboard.scan.gedung') }}" class="nav-link {{ Request::is('admin/scanning/gedung') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Gedung</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.scan.ruangan') }}" class="nav-link">
+                                    <a href="{{ route('dashboard.scan.ruangan') }}" class="nav-link {{ Request::is('admin/scanning/ruangan') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ruangan</p>
                                     </a>
@@ -152,7 +152,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="{{ route('notification.index') }}" class="nav-link {{ Request::is('admin/notifikasi') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-bell"></i>
                                 <p>
                                     Notification
