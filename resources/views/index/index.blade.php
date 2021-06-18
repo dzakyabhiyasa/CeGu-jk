@@ -23,79 +23,70 @@ Pilihlah Gedung yang Anda Inginkan
         </select>
     </div>
     <div class="col-6 col-lg-4 offset-lg-4">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cari ..." aria-label="Cari ..." aria-describedby="basic-addon1">
+        <form action="{{ route('index') }}" method="get" class="input-group">
+            <input type="text" name="title" class="form-control" placeholder="Cari ..." aria-label="Cari ..." aria-describedby="basic-addon1" value="{{ request()->query('title') }}">
             <div class="input-group-append">
-                <button class="btn btn-info" type="button">
+                <button class="btn btn-info" type="submit">
                     <i class="ti-search"></i>
                 </button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
 <hr>
 
 <div class="row">
-    @for ($i = 0; $i < 6; $i++)
+    @foreach($buildings as $building)
     <div class="col-12 col-lg-4 col-md-6">
         <div class="card">
+            @if($building->images->count() > 0)
+            <img class="card-img-top img-responsive" src="{{ Storage::url($building->images[0]->image) }}" alt="Card image cap">
+            @else
             <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card image cap">
+            @endif
             <div class="card-body">
                 <div class="text-center">
-                    <h4 class="card-title">[NAMA GEDUNG YANG PANJANG BANGET]</h4>
+                    <h4 class="card-title">{{ $building->name }}</h4>
                 </div>
                 <hr>
                 <div class="mb-2">
                     <p class="mb-0 font-weight-bold">Alamat :</p>
-                    <p class="mb-0">[Alamat yang panjangnya mungkin 2 baris. lumayan panjang sih tapi ini cuma display doang]</p>
+                    <p class="mb-0">{{ $building->address }}</p>
                 </div>
                 <div class="d-flex mb-2">
                     <div class="mr-2 font-weight-bold align-items-center">
                         <p class="mb-0">Jumlah Ruangan</p>
                     </div>
                     <div class="ml-auto align-items-center">
-                        <span class="badge badge-pill badge-warning">20</span>
+                        <span class="badge badge-pill badge-warning">{{ $building->rooms->count() }}</span>
                     </div>
                 </div>
-                <div class="d-flex mb-2">
+                <!-- <div class="d-flex mb-2">
                     <div class="mr-2 font-weight-bold align-items-center">
                         <p class="mb-0">Jumlah Terpakai</p>
                     </div>
                     <div class="ml-auto align-items-center">
                         <span class="badge badge-pill badge-danger">5</span>
                     </div>
-                </div>
+                </div> -->
                 <hr>
-                <a href="{{ route('detail') }}" class="btn btn-info btn-block">
+                <a href="{{ route('detail', $building->id) }}" class="btn btn-info btn-block">
                     Cek Ruangan
                 </a>
             </div>
         </div>
     </div>
-    @endfor
+    @endforeach
+
 </div>
-<div class="row justify-content-center">
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                    <span aria-hidden="true">«</span>
-                    <span class="sr-only">Previous</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-            <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-            <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                    <span aria-hidden="true">»</span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
+<div class="row">
+    <div class="mx-auto">
+        {{ $buildings->links('pagination::bootstrap-4') }}
+    </div>
 </div>
+
 
 @endsection
 
