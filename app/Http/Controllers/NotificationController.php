@@ -14,7 +14,11 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Notification::get();
+
+        return view('notif.index')->with([
+            'notifications' => $notifications
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class NotificationController extends Controller
      */
     public function create()
     {
-        //
+        return view('notif.create');
     }
 
     /**
@@ -35,7 +39,8 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Notification::create($request->all());
+        return redirect()->route('notification.index');
     }
 
     /**
@@ -46,7 +51,9 @@ class NotificationController extends Controller
      */
     public function show(Notification $notification)
     {
-        //
+        return view('notif.show')->with([
+            'notification' => $notification
+        ]);
     }
 
     /**
@@ -57,7 +64,9 @@ class NotificationController extends Controller
      */
     public function edit(Notification $notification)
     {
-        //
+        return view('notif.edit')->with([
+            'notification' => $notification
+        ]);
     }
 
     /**
@@ -69,7 +78,8 @@ class NotificationController extends Controller
      */
     public function update(Request $request, Notification $notification)
     {
-        //
+        $notification->update($request->all());
+        return redirect()->route('notification.index');
     }
 
     /**
@@ -80,6 +90,7 @@ class NotificationController extends Controller
      */
     public function destroy(Notification $notification)
     {
-        //
+        $notification->delete();  
+        return redirect()->route('notification.index');
     }
 }
