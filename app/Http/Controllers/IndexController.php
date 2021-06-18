@@ -32,15 +32,18 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {
-
         if ($request->query('title') !== null) {
             $buildings = Building::where('name', 'like', '%' . $request->query('title') . '%')->paginate(6);
+        } else if ($request->query('date') !== null) {
+            $buildings = Building::with('rooms.bookings')->paginate(6);
+            // dd($buildings);
         } else {
             $buildings = Building::paginate(6);
         }
 
         return view('index.index')->with([
-            'buildings' => $buildings
+            'buildings' => $buildings,
+            'date' => $request->query('date')
         ]);
     }
 

@@ -23,7 +23,7 @@ class NotificationController extends Controller
 
     public function index_user()
     {
-        $notifications = Notification::get();
+        $notifications = Notification::orderBy('created_at', 'DESC')->get();
         // dd($notifications);
         return view('notif.user')->with([
             'notifications' => $notifications
