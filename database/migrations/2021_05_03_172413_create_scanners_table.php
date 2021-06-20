@@ -21,6 +21,8 @@ class CreateScannersTable extends Migration
             $table->string('body_temperature');
             $table->boolean('face_mask');
             $table->boolean('washing_hands');
+            $table->dateTime('building_in', $precision = 0);
+            $table->dateTime('room_in', $precision = 0);
             $table->timestamps();
         });
     }

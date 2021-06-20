@@ -9,7 +9,7 @@ History Transaksi
 @endsection
 
 @section('header')
-History Transaksi
+Riwayat Booking
 @endsection
 
 @section('content')
@@ -21,8 +21,9 @@ History Transaksi
             <th>Ruangan</th>
             <th>Tanggal</th>
             <th>Deskripsi</th>
-            <th>status</th>
-            <th>Action</th>
+            <th>Status</th>
+            <th>Pengunjung</th>
+            <th>Scanning</th>
         </tr>
         @foreach($bookings as $booking)
         <tr>
@@ -31,16 +32,27 @@ History Transaksi
             <td>{{ $booking->date }}</td>
             <td>{{ $booking->description }}</td>
             <td>{{ $booking->status }}</td>
-            <td>
-                @if ($booking->status == 'accept')
+            @if ($booking->status == 'accept')
+                <td>
                     <form action="{{ route('visitor.index') }}" method="GET">
                         <input type="hidden" name="bookingId" value="{{$booking->id}}" />
                         <button class="btn btn-primary w-100" type="submit">List Pengunjung</button> 
-                    </form>
-                @else
-                    <button class="btn btn-primary w-100" disabled>List Pengunjung</button>    
-                @endif               
+                    </form>            
+                </td>
+                <td>
+                    <form action="{{ route('scanner.index') }}" method="GET">
+                        <input type="hidden" name="bookingId" value="{{$booking->id}}" />
+                        <button class="btn btn-primary w-100" type="submit">Scanning Pengunjung</button> 
+                    </form>    
+                </td>
+            @else
+            <td>
+                <button class="btn btn-primary w-100" disabled>List Pengunjung</button>                     
             </td>
+            <td>
+                <button class="btn btn-primary w-100" disabled>Scanning Pengunjung</button>
+            </td>
+            @endif
         </tr>
         @endforeach
     </table>

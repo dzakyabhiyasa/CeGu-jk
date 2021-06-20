@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\building;
+use App\Models\Building;
 use Illuminate\Http\Request;
 
 class BuildingController extends Controller
@@ -14,7 +14,11 @@ class BuildingController extends Controller
      */
     public function index()
     {
-        //
+        $buildings = Building::get();
+
+        return view('gedung.index')->with([
+            'buildings' => $buildings
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-        //
+        return view('gedung.create');
     }
 
     /**
@@ -35,51 +39,63 @@ class BuildingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Building::create($request->all());
+        return redirect()->route('gedung.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\building  $building
+     * @param  \App\Models\Building  $building
      * @return \Illuminate\Http\Response
      */
-    public function show(building $building)
+    public function show($id)
     {
-        //
+        $building = Building::find($id);
+        // dd($building->images);
+        return view('gedung.show')->with([
+            'building' => $building
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\building  $building
+     * @param  \App\Models\Building  $building
      * @return \Illuminate\Http\Response
      */
-    public function edit(building $building)
+    public function edit($id)
     {
-        //
+        $building = Building::find($id);
+        return view('gedung.edit')->with([
+            'building' => $building
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\building  $building
+     * @param  \App\Models\Building  $building
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, building $building)
+    public function update(Request $request, $id)
     {
-        //
+        $building = Building::find($id);
+        $building->update($request->all());
+        return redirect()->route('gedung.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\building  $building
+     * @param  \App\Models\Building  $building
      * @return \Illuminate\Http\Response
      */
-    public function destroy(building $building)
+    public function destroy($id)
     {
-        //
+        $building = Building::find($id);
+        $building->delete();  
+        return redirect()->route('gedung.index');
     }
 }
