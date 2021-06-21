@@ -16,7 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        DB::table('users')->insert([ 
+            'id' => '1',
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin12345'),
+            'role' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         \App\Models\Building::factory(10)
         ->has(
             Room::factory()
@@ -27,14 +36,6 @@ class DatabaseSeeder extends Seeder
         )
         ->create();
 
-        DB::table('users')->insert([ 
-            'id' => '2',
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin12345'),
-            'role' => 'admin',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        
     }
 }
