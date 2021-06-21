@@ -32,15 +32,18 @@ class IndexController extends Controller
 
     public function index(Request $request)
     {
-
         if ($request->query('title') !== null) {
             $buildings = Building::where('name', 'like', '%' . $request->query('title') . '%')->paginate(6);
+        } else if ($request->query('date') !== null) {
+            $buildings = Building::with('rooms.bookings')->paginate(6);
+            // dd($buildings);
         } else {
             $buildings = Building::paginate(6);
         }
 
         return view('index.index')->with([
-            'buildings' => $buildings
+            'buildings' => $buildings,
+            'date' => $request->query('date')
         ]);
     }
 
@@ -100,7 +103,7 @@ class IndexController extends Controller
 
     public function booking_process(Request $request, $building_id, $room_id)
     {
-
+        // dd($request);
         if (!Auth::check()) {
             return redirect(route('login'));
         }
@@ -112,9 +115,9 @@ class IndexController extends Controller
         Booking::create([
             'room_id' => $room_id,
             'user_id' => Auth::user()->id,
-            'date' => Carbon::now(),
-            'in' => Carbon::now(),
-            'out' => Carbon::now(),
+            'date' => $request->date,
+            'in' => $request->in,
+            'out' => $request->out,
             'description' => $request->reason,
             'permission' => $path,
             'expired' => 0,

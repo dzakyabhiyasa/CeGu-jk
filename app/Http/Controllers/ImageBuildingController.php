@@ -35,7 +35,15 @@ class ImageBuildingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $path = $request->file('image')->store('public');
+
+        ImageBuilding::create([
+            'building_id' => $request->building_id,
+            'image' => $path,
+        ]);
+
+        return redirect()->route('gedung.edit', [$request->building_id]);
     }
 
     /**
@@ -78,8 +86,11 @@ class ImageBuildingController extends Controller
      * @param  \App\Models\ImageBuilding  $imageBuilding
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ImageBuilding $imageBuilding)
+    public function destroy(Request $request, $id)
     {
-        //
+        $imageBuilding = ImageBuilding::find($id);
+        $imageBuilding->delete(); 
+
+        return redirect()->route('gedung.edit', [$request->building_id]);
     }
 }
