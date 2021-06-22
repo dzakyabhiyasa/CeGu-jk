@@ -38,19 +38,16 @@ Route::get('/success', [App\Http\Controllers\IndexController::class, 'success'])
 
 Route::post('/building-to-room', [IndexController::class, 'building_to_room'])->name('building.room');
 Route::get('/room/{id}', [RoomController::class, 'detail'])->name('room.show');
-
 Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
 Route::resource('visitor', VisitorController::class);
 
 Route::get('/scanner/scan', [ScannerController::class, 'scanning'])->name('scanner.scan');
-
 Route::resource('scanner', ScannerController::class);
 
-Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
-
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/notification', [App\Http\Controllers\NotificationController::class, 'index_user'])->name('notification.user');
 
 //dashboard
 Route::get('/admin', [IndexController::class, 'admin'])->name('dashboard.index');
