@@ -15,12 +15,15 @@ Pilihlah Gedung yang Anda Inginkan
 @section('content')
 <div class="row">
     <div class="col-6 col-lg-4">
-        <select name="filter" class="form-control">
-            <option value="populer">Populer</option>
-            <option value="newest">Terbaru</option>
-            <option value="cheapest">Harga Terendah</option>
-            <option value="expensive">Harga Tertinggi</option>
-        </select>
+        <form action="{{ route('index') }}" method="get" class="input-group">
+            <label>Sort by date : </label>
+            <input type="date" name="date" class="form-control" placeholder="Cari ..." aria-label="Cari ..." aria-describedby="basic-addon1" value="{{ request()->query('date') }}">
+            <div class="input-group-append">
+                <button class="btn btn-info" type="submit">
+                    <i class="ti-search"></i>
+                </button>
+            </div>
+        </form>
     </div>
     <div class="col-6 col-lg-4 offset-lg-4">
         <form action="{{ route('index') }}" method="get" class="input-group">
@@ -62,14 +65,28 @@ Pilihlah Gedung yang Anda Inginkan
                         <span class="badge badge-pill badge-warning">{{ $building->rooms->count() }}</span>
                     </div>
                 </div>
-                <!-- <div class="d-flex mb-2">
-                    <div class="mr-2 font-weight-bold align-items-center">
-                        <p class="mb-0">Jumlah Terpakai</p>
+                @if ($date !== "" && !empty($date))
+                    @php
+                        $value = 0;
+                    @endphp
+                    @foreach ($building->rooms as $room)
+                        @foreach ($room->bookings as $booking)
+                            @if ($date == $booking->date)
+                                @php
+                                    $value++;
+                                @endphp
+                            @endif
+                        @endforeach
+                    @endforeach
+                    <div class="d-flex mb-2">
+                        <div class="mr-2 font-weight-bold align-items-center">
+                            <p class="mb-0">Jumlah Terpakai</p>
+                        </div>
+                        <div class="ml-auto align-items-center">
+                            <span class="badge badge-pill badge-danger">{{$value}}</span>
+                        </div>
                     </div>
-                    <div class="ml-auto align-items-center">
-                        <span class="badge badge-pill badge-danger">5</span>
-                    </div>
-                </div> -->
+                @endif
                 <hr>
                 <a href="{{ route('detail', $building->id) }}" class="btn btn-info btn-block">
                     Cek Ruangan

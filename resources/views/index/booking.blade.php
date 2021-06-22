@@ -23,13 +23,19 @@ Perizinan Akses Gedung
                 <textarea class="form-control" name="reason" id="reason" cols="30" rows="2"></textarea>
             </div>
             <div class="form-group">
-                <label for="date-format">Jadwal Digunakan</label>
-                <p class="mt-0">* Akan kadaluarsa selama 7 hari</p>
-                <input name="expired" type="text" class="date-format form-control">
+                <label for="date-format">Hari Digunakan</label>
+                <input name="date" type="date" class="form-control">
             </div>
             <div class="form-group">
                 <label for="date-format">Jadwal Selesai</label>
-                <input name="out" type="text" class="date-format form-control">
+                <div class="row">
+                    <div class="col-6">
+                        <input name="in" type="time" class="form-control">
+                    </div>
+                    <div class="col-6">
+                        <input name="out" type="time" class="form-control">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="reason">Surat Keterangan Sehat COVID-19</label>

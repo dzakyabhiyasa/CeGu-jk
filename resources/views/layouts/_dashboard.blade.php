@@ -35,7 +35,7 @@
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- Left navbar links -->
-            <ul class="navbar-nav">
+            {{-- <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
@@ -57,7 +57,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
@@ -78,7 +78,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="img/header-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{{asset('img/header-logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">CEGU</span>
             </a>
 
@@ -90,30 +90,61 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('dashboard.index') }}" class="nav-link">
+                            <a href="{{ route('dashboard.index') }}" class="nav-link {{ Request::is('admin') ? 'active' : ''}}  ">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Dashboard
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <li class="nav-item active">
+                            <a href="{{ route('dashboard.booking') }}" class="nav-link {{ Request::is('admin/booking') ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-check-square"></i>
                                 <p>
                                     Approval
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link {{ Request::is('admin/crud*') ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-database"></i>
+                                <p>
+                                    Pengolahan Data
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.booking') }}" class="nav-link active">
+                                    <a href="{{ route('gedung.index') }}" class="nav-link {{ Request::is('admin/crud/gedung*') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Gedung</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard.booking') }}" class="nav-link">
+                                    <a href="{{ route('ruangan.index') }}" class="nav-link {{ Request::is('admin/crud/ruangan*') ? 'active' : ''}}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ruangan</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link {{ Request::is('admin/scanning*') ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Scanning
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.scan.gedung') }}" class="nav-link {{ Request::is('admin/scanning/gedung*') ? 'active' : ''}}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Gedung</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard.scan.ruangan') }}" class="nav-link {{ Request::is('admin/scanning/ruangan*') ? 'active' : ''}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ruangan</p>
                                     </a>
@@ -121,8 +152,8 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                            <a href="{{ route('notification.index') }}" class="nav-link {{ Request::is('admin/notifikasi') ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-bell"></i>
                                 <p>
                                     Notification
                                 </p>

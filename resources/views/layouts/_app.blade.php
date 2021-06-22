@@ -92,6 +92,10 @@
                                     <i class="ti-book m-r-5 m-l-5"></i>
                                     Riwayat Booking
                                 </a>
+                                <a class="dropdown-item" href="{{ route('notification.user') }}">
+                                    <i class="ti-announcement m-r-5 m-l-5"></i>
+                                    Notifikasi
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i>

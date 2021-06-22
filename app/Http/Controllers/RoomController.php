@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\room;
+use App\Models\Building;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -15,7 +16,11 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        $rooms = room::get();
+
+        return view('ruangan.index')->with([
+            'rooms' => $rooms
+        ]);
     }
 
     /**
@@ -25,7 +30,11 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $buildings = Building::get();
+
+        return view('ruangan.create')->with([
+            'buildings' => $buildings
+        ]);
     }
 
     /**
@@ -36,18 +45,12 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        room::create($request->all());
+        return redirect()->route('ruangan.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\room  $room
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, $id)
+    public function detail(Request $request, $id)
     {
-
         $room = room::find($id);
 
         if ($request->query('order') !== null) {
@@ -63,14 +66,34 @@ class RoomController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\room  $room
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $id)
+    {
+        $room = room::find($id);
+        // dd($building->images);
+        return view('ruangan.show')->with([
+            'room' => $room
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function edit(room $room)
+    public function edit($id)
     {
-        //
+        $buildings = Building::get();
+        $room = room::find($id);
+        return view('ruangan.edit')->with([
+            'buildings' => $buildings,
+            'room' => $room
+        ]);
     }
 
     /**
@@ -80,9 +103,11 @@ class RoomController extends Controller
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, room $room)
+    public function update(Request $request, $id)
     {
-        //
+        $room = Room::find($id);
+        $room->update($request->all());
+        return redirect()->route('ruangan.index');
     }
 
     /**
@@ -91,8 +116,10 @@ class RoomController extends Controller
      * @param  \App\Models\room  $room
      * @return \Illuminate\Http\Response
      */
-    public function destroy(room $room)
+    public function destroy($id)
     {
-        //
+        $room = room::find($id);
+        $room->delete();  
+        return redirect()->route('ruangan.index');
     }
 }
